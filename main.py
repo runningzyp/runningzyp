@@ -77,7 +77,7 @@ if __name__ == "__main__":
     files = g.files
     waka_stats = get_stats()
     print(waka_stats)
-    # g.edit(
-    #     description=this_week(),
-    #     files={"📊Code-Life": github.InputFileContent(content=waka_stats)},
-    # )
+    g.edit(
+        description=this_week(),
+        files={"📊Code-Life": github.InputFileContent(content=waka_stats)},
+    )
