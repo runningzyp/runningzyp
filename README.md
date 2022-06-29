@@ -4,7 +4,7 @@ Here are some ideas to get you started: -->
 
 ### 👋 Hi there 
 
-This is **Cai**, backend developer at [HYPERS Inc](https://hypers.com/).
+This is **Cai**, backend developer at [FLEXIV Inc](https://www.flexiv.com/).
 
 - ![python](https://xiangcaihua-blog.oss-cn-shanghai.aliyuncs.com/pic-go/Python.svg)    I’m currently working on ***Python***
 - ![go](https://xiangcaihua-blog.oss-cn-shanghai.aliyuncs.com/pic-go/golang_2.svg)    I’m currently learning ***Go*** 
