@@ -74,6 +74,8 @@ def get_stats() -> str:
 
 
 if __name__ == "__main__":
+    print("GH_TOKEN: "+ ghtoken)
+    print("WAKATIME_API_KEY: "+ waka_key)
     g = Github(ghtoken)
     g = g.get_gist(gist)
     files = g.files
