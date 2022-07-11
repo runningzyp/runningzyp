@@ -13,8 +13,8 @@ GRAPH_LENGTH = 25
 TEXT_LENGTH = 16
 
 gist = "a98736910e9336e2c13700caa3c0a6f3"
-waka_key = os.getenv("WAKATIME_API_KEY") or "87463f1b-3764-4032-8a38-3b27ca70b739"
-ghtoken = os.getenv("GH_TOKEN") or "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" # gist only
+waka_key = os.getenv("WAKATIME_API_KEY") or ""
+ghtoken = os.getenv("GH_TOKEN") or "" # gist only
 show_title = False
 commit_message = "update gists"
 blocks = "░▒▓█"
