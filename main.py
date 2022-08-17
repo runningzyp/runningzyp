@@ -57,7 +57,7 @@ def get_stats() -> str:
         return "No Activity tracked this Week\n"
 
     for lang in lang_data[:5]:
-        name = lang["name"].ljust(8, " ") if pad < 8 else lang["name"].ljust(10, " ")
+        name = lang["name"].ljust(7, " ") if pad < 8 else lang["name"].ljust(10, " ")
 
         hours = lang["hours"]  # 时长
         minutes = lang["minutes"]
