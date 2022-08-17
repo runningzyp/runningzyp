@@ -9,16 +9,19 @@ from github import Github
 import github
 import requests
 
+GIST_MAX_ROW_LENGTH = 50
 GRAPH_LENGTH = 25
 TEXT_LENGTH = 16
 
 gist = "a98736910e9336e2c13700caa3c0a6f3"
 waka_key = os.getenv("WAKATIME_API_KEY") or ""
-ghtoken = os.getenv("GH_TOKEN") or "" # gist only
+ghtoken = (
+    os.getenv("GH_TOKEN") or ""
+)  # gist only
 show_title = False
 commit_message = "update gists"
 blocks = "░▒▓█"
-show_time = False
+show_time = True
 
 
 def this_week() -> str:
@@ -47,35 +50,49 @@ def get_stats() -> str:
     lang_data = data["data"]["languages"]
     ln_graph = GRAPH_LENGTH
     data_list = []
+
     try:
-        pad = len(max([l["name"] for l in lang_data[:5]], key=len))
+        pad = max([len(l["name"]) for l in lang_data[:5]])
     except ValueError:
         return "No Activity tracked this Week\n"
+
     for lang in lang_data[:5]:
-        if lang["hours"] == 0 and lang["minutes"] == 0:
+        name = lang["name"].ljust(8, " ") if pad < 8 else lang["name"].ljust(10, " ")
+
+        hours = lang["hours"]  # 时长
+        minutes = lang["minutes"]
+
+        if not hours and not minutes:
             continue
-        lth = len(lang["name"])
-        text = ""
         if show_time:
-            ln_text = len(lang["text"])
-            text = f"{lang['text']}{' '*(TEXT_LENGTH - ln_text)}"
-        fmt_percent = format(lang["percent"], "0.2f").zfill(5)
-        data_list.append(
-            f"{lang['name']}{' '*(pad + 3 - lth)}{text}{make_graph(lang['percent'], blocks, ln_graph)}   {fmt_percent} % "
+            hour_str = f"{hours}h," if hours else ""
+            minute_str = f"{minutes}m" if minutes else ""
+            code_time = f"{hour_str}{minute_str}".rjust(7, " ")
+        else:
+            code_time = ""
+
+        percent = lang["percent"]  # 百分比
+        fmt_percent = f"{percent:.2f}%".rjust(6, "0")
+
+        text = (
+            f"{name} {make_graph(percent, blocks, ln_graph)}  {code_time} {fmt_percent}"
         )
+
+        data_list.append(text)
+
     print("Graph Generated")
     data = "\n".join(data_list)
     if show_title:
         return this_week() + data + "\n"
     else:
         if not data:
-            return 'No Activity tracked this Week\n'
+            return "No Activity tracked this Week\n"
         return data + "\n"
 
 
 if __name__ == "__main__":
-    print("GH_TOKEN: "+ ghtoken)
-    print("WAKATIME_API_KEY: "+ waka_key)
+    print("GH_TOKEN: " + ghtoken)
+    print("WAKATIME_API_KEY: " + waka_key)
     g = Github(ghtoken)
     g = g.get_gist(gist)
     files = g.files
