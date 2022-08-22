@@ -9,9 +9,7 @@ from github import Github
 import github
 import requests
 
-GIST_MAX_ROW_LENGTH = 50
-GRAPH_LENGTH = 25
-TEXT_LENGTH = 16
+GRAPH_LENGTH = 22
 
 gist = "a98736910e9336e2c13700caa3c0a6f3"
 waka_key = os.getenv("WAKATIME_API_KEY") or ""
@@ -57,7 +55,7 @@ def get_stats() -> str:
         return "No Activity tracked this Week\n"
 
     for lang in lang_data[:5]:
-        name = lang["name"].ljust(8, " ") if pad < 8 else lang["name"].ljust(10, " ")
+        name = lang["name"].ljust(11, " ")
 
         hours = lang["hours"]  # 时长
         minutes = lang["minutes"]
@@ -66,7 +64,7 @@ def get_stats() -> str:
             continue
         if show_time:
             hour_str = f"{hours}h," if hours else ""
-            minute_str = f"{minutes}m" if minutes else ""
+            minute_str = f"{minutes}m".rjust(3, "0") if minutes else ""
             code_time = f"{hour_str}{minute_str}".rjust(7, " ")
         else:
             code_time = ""
