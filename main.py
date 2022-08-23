@@ -55,7 +55,7 @@ def get_stats() -> str:
         return "No Activity tracked this Week\n"
 
     for lang in lang_data[:5]:
-        name = lang["name"].ljust(11, " ")
+        name = lang["name"]
 
         hours = lang["hours"]  # 时长
         minutes = lang["minutes"]
@@ -65,16 +65,21 @@ def get_stats() -> str:
         if show_time:
             hour_str = f"{hours}h," if hours else ""
             minute_str = f"{minutes}m".rjust(3, "0") if minutes else ""
-            code_time = f"{hour_str}{minute_str}".rjust(7, " ")
+            code_time = f"{hour_str}{minute_str}"
         else:
             code_time = ""
 
         percent = lang["percent"]  # 百分比
         fmt_percent = f"{percent:.2f}%".rjust(6, "0")
 
-        text = (
-            f"{name} {code_time} {make_graph(percent, blocks, ln_graph)} {fmt_percent}"
-        )
+        name_time_len = 19
+
+        if len(name) + len(code_time) < name_time_len:
+            name_time = (
+                f"{name}{' '*(name_time_len-len(name) - len(code_time))}{code_time}"
+            )
+
+        text = f"{name_time} {make_graph(percent, blocks, ln_graph)} {fmt_percent}"
 
         data_list.append(text)
 
