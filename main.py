@@ -13,9 +13,7 @@ GRAPH_LENGTH = 22
 
 gist = "a98736910e9336e2c13700caa3c0a6f3"
 waka_key = os.getenv("WAKATIME_API_KEY") or ""
-ghtoken = (
-    os.getenv("GH_TOKEN") or ""
-)  # gist only
+ghtoken = os.getenv("GH_TOKEN") or ""  # gist only
 show_title = False
 commit_message = "update gists"
 blocks = "░▒▓█"
@@ -53,9 +51,9 @@ def get_stats() -> str:
         pad = max([len(l["name"]) for l in lang_data[:5]])
     except ValueError:
         return "No Activity tracked this Week\n"
-
+    lang_map = {"Gettext Catalog": "Gettext"}
     for lang in lang_data[:5]:
-        name = lang["name"]
+        name = lang_map.get(lang["name"], lang["name"])
 
         hours = lang["hours"]  # 时长
         minutes = lang["minutes"]
