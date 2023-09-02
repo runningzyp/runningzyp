@@ -2,7 +2,7 @@
 <!-- **runningzyp/runningzyp** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile. 
 Here are some ideas to get you started: -->
 
-![](https://xiangcaihua-blog.oss-cn-shanghai.aliyuncs.com/pic-go/ni.png)
+![](./ni.png)
 <!-- ### 👋 Hi there 
 
 This is **Cai**, backend developer at [FLEXIV Inc](https://www.flexiv.com/).
